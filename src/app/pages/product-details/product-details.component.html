@@ -1,0 +1,30 @@
+@if (productDetails) {
+<div class="row items-center">
+  <div class="w-1/4 ">
+    <owl-carousel-o [options]="customOptions">
+      @for (image of productDetails.images; track $index) {
+      <ng-template carouselSlide [id]="image">
+        <img [src]="image" class="w-full object-cover">
+      </ng-template>
+      }
+    </owl-carousel-o>
+  </div>
+  <div class="w-3/4">
+    <div class="ms-3">
+      <h1 class="text-4xl mb-3 font-extrabold">{{productDetails.title}}</h1>
+      <p class="mb-10">{{productDetails.description}}</p>
+      <span class="text-green-600">{{productDetails.category.name}}</span>
+      <div class="flex justify-between">
+        <p>{{productDetails.price|currency:'USD'}}</p>
+        <p>{{productDetails.ratingsAverage}}<i class="fa fa-star text-yellow-300"></i></p>
+      </div>
+      <button class="btn mt-2" (click)="addProductToCart(productDetails.id)">
+        @if(isCallingApi){
+        <i class="fa fa-spin fa-spinner"></i>
+        }
+        +Add to cart
+      </button>
+    </div>
+  </div>
+</div>
+}

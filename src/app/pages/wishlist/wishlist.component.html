@@ -1,0 +1,46 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <h1 class="text-4xl text-green-600 text-center my-5">Wishlist products</h1>
+  @if (wishlistProducts) {
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-16 py-3">
+          <span class="sr-only">Image</span>
+        </th>
+        <th scope="col" class="px-6 py-3">
+          title
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Price
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of wishlistProducts; track $index) {
+      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+        <td class="p-4">
+          <img [src]="product.imageCover" class="w-16 md:w-32 max-w-full max-h-full" [alt]="product.title">
+        </td>
+        <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+          {{product.title}}
+        </td>
+        <td class="px-6 py-4 font-semibold text-green-500 dark:text-white">
+          {{product.price|currency:'USD'}}
+        </td>
+        <td class="px-6 py-4">
+          <button (click)="deleteProductFromWishlist(product.id)"
+            class="font-medium text-white px-5 py-2 rounded-lg  dark:text-red-500 hover:bg-red-700 bg-red-500">Remove</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }@else {
+  <h2 class="text-center my-5">Empty wishlist ... Start shopping
+    <a routerLink="/home" class="font-semibold text-2xl inline-block">now</a>
+  </h2>
+  }
+</div>

@@ -1,0 +1,13 @@
+@if (categories) {
+
+<div>
+  <h2 class="text-2xl md:text-3xl my-4 px-4 font-semibold text-green-500">Shop popular categories </h2>
+  <owl-carousel-o [options]="customOptions">
+    @for (category of categories; track $index) {
+    <ng-template carouselSlide>
+      <img [src]="category.image" class="h-[200px] object-cover" [alt]="category.name">
+    </ng-template>
+    }
+  </owl-carousel-o>
+</div>
+}

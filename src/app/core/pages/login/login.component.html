@@ -1,0 +1,61 @@
+<form class="max-w-xl mx-auto px-6 my-16" [formGroup]="loginForm" (ngSubmit)="signIn()">
+  <h1 class="text-4xl text-green-600 my-8">Login Now :</h1>
+  @if(apiErrorMSG){
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <span class="font-medium">{{apiErrorMSG}}</span>
+  </div>
+  }
+  <div class="relative z-0 w-full mb-5 group">
+    <input type="email" name="email" id="email" formControlName="email"
+      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+      placeholder="" />
+    <label for="email"
+      class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">User
+      Email</label>
+  </div>
+  @if (loginForm.get('email')?.errors &&( loginForm.get('email')?.touched || loginForm.get('email')?.dirty)) {
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <span class="font-medium">
+      @if (loginForm.get('email')?.errors?.['required']) {
+      Required
+      }@else if (loginForm.get('email')?.errors?.['email']) {
+      Invalid email
+      }
+    </span>
+  </div>
+  }
+  <div class="relative z-0 w-full mb-5 group">
+    <input type="password" name="password" id="password" formControlName="password"
+      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+      placeholder="" />
+    <label for="password"
+      class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">User
+      Password</label>
+  </div>
+  @if (loginForm.get('password')?.errors &&( loginForm.get('password')?.touched || loginForm.get('password')?.dirty)) {
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <span class="font-medium">
+      @if (loginForm.get('password')?.errors?.['required']) {
+      Required
+      }@else if (loginForm.get('password')?.errors?.['pattern']) {
+      Invalid password
+      }
+    </span>
+  </div>
+  }
+
+  <div class="flex items-center justify-between">
+    <button type="submit" [disabled]="loginForm.invalid || callingAPI" [class.opacity-25]="loginForm.invalid"
+      class="text-white bg-green-700  focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mr-7 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800  ">
+      @if (callingAPI) {
+      <i class="fa fa-spin fa-spinner"></i>
+      } @else {
+      Login
+      }
+    </button>
+    <!-- <p class="text-sm font-light text-gray-600 dark:text-gray-400">
+      You don't have an acount yet? <a routerLink="/register" class=" font-semibold">Register Now</a>
+    </p> -->
+    <a routerLink="/forgotPassword" class="text-green-700 font-semibold hover:text-green-500">Forgot Password?</a>
+  </div>
+</form>

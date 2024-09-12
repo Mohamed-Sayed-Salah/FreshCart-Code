@@ -1,0 +1,67 @@
+<form class="md:w-[70%] mx-auto" [formGroup]="shippingDetails" (ngSubmit)="continue()">
+  <h1 class="text-4xl text-green-500 my-8">Shopping Address : </h1>
+  @if(apiErrorMSG){
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <span class="font-medium">{{apiErrorMSG}}</span>
+  </div>
+  }
+  <div class="relative z-0 w-full mb-5 group">
+    <input type="text" name="details" id="details" formControlName="details"
+      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+      placeholder="" />
+    <label for="details"
+      class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">User
+      Details</label>
+  </div>
+  @if (shippingDetails.get('details')?.errors &&( shippingDetails.get('details')?.touched ||
+  shippingDetails.get('details')?.dirty)) {
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <span class="font-medium">
+      @if (shippingDetails.get('details')?.errors?.['required']) {
+      Required
+      }
+    </span>
+  </div>
+  }
+
+  <div class="relative z-0 w-full mb-5 group">
+    <input type="tel" name="phone" id="phone" formControlName="phone"
+      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+      placeholder="" />
+    <label for="phone"
+      class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">User
+      Phone</label>
+  </div>
+  @if (shippingDetails.get('phone')?.errors &&
+  (shippingDetails.get('phone')?.touched||shippingDetails.get('phone')?.dirty)) {
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <span class="font-medium">
+      @if (shippingDetails.get('phone')?.errors?.['required']) {
+      Required
+      }@else if (shippingDetails.get('phone')?.errors?.['pattern']) {
+      Invalid phone
+      }
+    </span>
+  </div>
+  }
+
+  <div class="relative z-0 w-full mb-5 group">
+    <input type="text" name="city" id="city" formControlName="city"
+      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+      placeholder="" />
+    <label for="city"
+      class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">User
+      City</label>
+  </div>
+  @if (shippingDetails.get('city')?.errors &&( shippingDetails.get('city')?.touched ||
+  shippingDetails.get('city')?.dirty)) {
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <span class="font-medium">
+      @if (shippingDetails.get('city')?.errors?.['required']) {
+      Required
+      }
+    </span>
+  </div>
+  }
+  <button class="btn">continue</button>
+</form>
